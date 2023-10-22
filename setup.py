@@ -65,11 +65,16 @@ class CMakeBuild(build_ext):
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
             build_args += ['--', '-j2']
 
+        cmake_args += ['-DCUDA_ARCHITECTURES=native', '-DCMAKE_CUDA_ARCHITECTURES=native']
+
         env = os.environ.copy()
+        print(env)
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(
             env.get('CXXFLAGS', ''),
             self.distribution.get_version()
         )
+        env['CUDA_ARCHITECTURES'] = "native"
+        env['CMAKE_CUDA_ARCHITECTURES'] = "native"
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
         print(['cmake', ext.sourcedir] + cmake_args)
