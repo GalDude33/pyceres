@@ -4,7 +4,7 @@ project(PyCeres)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(Eigen3 3.3 REQUIRED)
-find_package(COLMAP REQUIRED)
+find_package(COLMAP 3.8 REQUIRED)
 
 if(${CERES_VERSION} VERSION_LESS "2.1.0")
     message( SEND_ERROR "Ceres version >= 2.1 required." )
